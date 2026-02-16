@@ -6,15 +6,16 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 17:11:18 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/01/23 17:49:06 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/16 18:47:52 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	initialize(t_stack *stack)
+void	error_exit(void)
 {
-	stack->top = -1;
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
 }
 
 bool	is_empty(t_stack *stack)
@@ -35,7 +36,6 @@ void	push(t_stack *stack, int value)
 		return ;
 	}
 	stack->array[++stack->top] = value;
-	printf("Pushed %d onto the stack\n", value);
 }
 
 int	pop(t_stack *stack)
@@ -49,6 +49,5 @@ int	pop(t_stack *stack)
 	}
 	popped = stack->array[stack->top];
 	stack->top--;
-	printf("Popped %d from the stack\n", popped);
 	return (popped);
 }

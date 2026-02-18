@@ -1,8 +1,9 @@
 # **************************************************************************** #
-#                                PUSH_SWAP                                    #
+#                                PUSH_SWAP                                     #
 # **************************************************************************** #
 
 NAME        = push_swap
+BONUS_NAME  = checker
 
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
@@ -10,43 +11,61 @@ CFLAGS      = -Wall -Wextra -Werror
 LIBFT_DIR   = libft
 LIBFT       = $(LIBFT_DIR)/libft.a
 
-SRCS        = push_swap.c \
-              push_swap_utils_1.c \
+INCLUDES    = -I. -I$(LIBFT_DIR)
+
+# ----------------------------- COMMON FILES --------------------------------- #
+
+COMMON_SRCS = push_swap_utils_1.c \
               push_swap_utils_2.c \
               push_swap_utils_3.c \
               push_swap_utils_4.c \
               push_swap_utils_5.c \
-			  push_swap_utils_6.c \
-			  push_swap_utils_7.c
+              push_swap_utils_6.c \
+              push_swap_utils_7.c \
+			  push_swap_utils_8.c
 
+COMMON_OBJS = $(COMMON_SRCS:.c=.o)
+
+# ----------------------------- MANDATORY ------------------------------------ #
+
+SRCS        = push_swap.c
 OBJS        = $(SRCS:.c=.o)
 
-INCLUDES    = -I. -I$(LIBFT_DIR)
+# ------------------------------ BONUS --------------------------------------- #
 
-# ---------------------------------------------------------------------------- #
-#                                   RULES                                      #
+BONUS_SRCS  = checker.c
+BONUS_OBJS  = $(BONUS_SRCS:.c=.o)
+
 # ---------------------------------------------------------------------------- #
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(LIBFT):
 	@make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+
+$(NAME): $(LIBFT) $(OBJS) $(COMMON_OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(COMMON_OBJS) $(LIBFT) -o $(NAME)
 	@echo "push_swap compiled successfully ✅"
+
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(LIBFT) $(BONUS_OBJS) $(COMMON_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) $(COMMON_OBJS) $(LIBFT) -o $(BONUS_NAME)
+	@echo "checker compiled successfully ✅"
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	@make clean -C $(LIBFT_DIR)
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS) $(COMMON_OBJS)
 	@echo "Object files removed 🧹"
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
-	rm -f $(NAME)
-	@echo "Executable removed 🗑"
+	rm -f $(NAME) $(BONUS_NAME)
+	@echo "Executables removed 🗑"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

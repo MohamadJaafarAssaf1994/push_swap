@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 10:44:02 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/16 18:44:41 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/18 12:35:51 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	case_one(t_stack *a)
 {
 	if (a->array[0] > a->array[1])
 		return ;
-	swap(a, 'a');
+	swap(a, 'a', ft_printf);
 }
 
-void	check_stack(t_stack a)
+int	check_stack(t_stack a)
 {
 	int	i;
 	int	j;
@@ -70,11 +70,12 @@ void	check_stack(t_stack a)
 		while (j <= a.top)
 		{
 			if (a.array[i] == a.array[j])
-				error_exit();
+				return (0);
 			j++;
 		}
 		i++;
 	}
+	return (1);
 }
 
 int	is_sorted(t_stack a)

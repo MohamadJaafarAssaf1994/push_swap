@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 09:17:17 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/01/23 14:10:28 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:38:10 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	main(void)
 	char	*line;
 	int		i;
 
-	fd = open("test.txt", O_RDONLY);
+	fd = open("./libft/getNextLine/test.txt", O_RDONLY);
 	if (fd < 0)
 	{
 		perror("open");

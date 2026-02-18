@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:01:08 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/16 18:37:41 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/18 13:02:02 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "libft/libft.h"
 # include <stdbool.h>
 # include <stdlib.h>
+# include <time.h>
 # include <unistd.h>
 
 typedef struct s_stack
@@ -30,11 +31,12 @@ bool	is_empty(t_stack *stack);
 bool	is_full(t_stack *stack);
 void	push(t_stack *stack, int value);
 int		pop(t_stack *stack);
-void	swap(t_stack *stack, char c);
-void	rotate(t_stack *stack, char c);
-void	reverse_rotate(t_stack *stack, char c);
+void	swap(t_stack *stack, char c, int (*f)(const char *str, ...));
+void	rotate(t_stack *stack, char c, int (*f)(const char *str, ...));
+void	reverse_rotate(t_stack *stack, char c, int (*f)(const char *str, ...));
 void	sort_stack_a(t_stack *stack, char c);
-void	push_double(t_stack *stack_a, t_stack *stack_b, char dest);
+void	push_double(t_stack *stack_a, t_stack *stack_b, char dest,
+			int (*f)(const char *str, ...));
 void	push_all_a_to_b(t_stack *a, t_stack *b);
 int		is_max(int n, int *tab, int size);
 int		is_min(int n, int *tab, int size);
@@ -49,8 +51,9 @@ int		min(int a, int b);
 int		abs(int a);
 int		total_cost(int index_element_stack_b, t_stack a, t_stack b);
 int		chosen_element_b_index(t_stack a, t_stack b);
-void	rotate_double(t_stack *a, t_stack *b);
-void	reverse_rotate_double(t_stack *a, t_stack *b);
+void	rotate_double(t_stack *a, t_stack *b, int (*f)(const char *str, ...));
+void	reverse_rotate_double(t_stack *a, t_stack *b, int (*f)(const char *str,
+				...));
 void	operation_one(t_stack *a, t_stack *b, int index_a, int index_b);
 void	operation_two(t_stack *a, t_stack *b, int index_a, int index_b);
 void	operation_three(t_stack *a, t_stack *b, int index_a, int index_b);
@@ -61,10 +64,11 @@ int		median(t_stack stack_a);
 int		is_only_digits(char *str);
 void	case_one(t_stack *a);
 char	**get_args(int argc, char *argv[]);
-void	print_stack(t_stack stack);
 void	error_exit(void);
 void	get_stack(t_stack *a, char **result);
-void	check_stack(t_stack a);
+int		check_stack(t_stack a);
 int		is_sorted(t_stack a);
+void	free_split(char **tab);
+void	push_swap(t_stack *a, t_stack *b);
 
 #endif

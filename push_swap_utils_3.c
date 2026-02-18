@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:07:53 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/16 18:42:08 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/18 13:05:17 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,32 @@ void	sort_stack_a(t_stack *stack, char c)
 	if (top <= middle && middle <= bottom)
 		return ;
 	if (top <= middle && bottom <= top)
-		reverse_rotate(stack, c);
+		reverse_rotate(stack, c, ft_printf);
 	else if (middle <= top && top <= bottom)
-		swap(stack, c);
+		swap(stack, c, ft_printf);
 	else if (bottom <= top && bottom >= middle)
-		rotate(stack, c);
+		rotate(stack, c, ft_printf);
 	else
 	{
-		swap(stack, c);
+		swap(stack, c, ft_printf);
 		sort_stack_a(stack, c);
 	}
 }
 
 void	push_all_a_to_b(t_stack *a, t_stack *b)
 {
+	b->top = -1;
 	while (a->top > 2)
 	{
 		if (a->array[a->top] <= median(*a))
-			push_double(b, a, 'b');
+			push_double(b, a, 'b', ft_printf);
 		else
 		{
-			push_double(b, a, 'b');
-			rotate(b, 'b');
+			push_double(b, a, 'b', ft_printf);
+			rotate(b, 'b', ft_printf);
 		}
 	}
+	sort_stack_a(a, 'a');
 }
 
 int	smallest_biggest_in_stack_a(t_stack a, t_stack b, int index_element_stack_b)
@@ -75,7 +77,8 @@ int	smallest_biggest_in_stack_a(t_stack a, t_stack b, int index_element_stack_b)
 	return (diff + b.array[index_element_stack_b]);
 }
 
-void	reverse_rotate_double(t_stack *a, t_stack *b)
+void	reverse_rotate_double(t_stack *a, t_stack *b, int (*f)(const char *str,
+			...))
 {
 	int	temp;
 	int	i;
@@ -98,7 +101,8 @@ void	reverse_rotate_double(t_stack *a, t_stack *b)
 		i++;
 	}
 	b->array[b->top] = temp;
-	ft_printf("rrr\n");
+	if (*f != NULL)
+		f("rrr\n");
 }
 
 int	index_by_element(int element, t_stack stack)

@@ -6,13 +6,13 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 17:11:18 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/16 18:41:27 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/18 13:05:22 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *stack, char c)
+void	swap(t_stack *stack, char c, int (*f)(const char *str, ...))
 {
 	int	temp;
 
@@ -21,18 +21,21 @@ void	swap(t_stack *stack, char c)
 	temp = stack->array[stack->top];
 	stack->array[stack->top] = stack->array[stack->top - 1];
 	stack->array[stack->top - 1] = temp;
-	ft_printf("%c%c\n", 's', c);
+	if (*f != NULL)
+		f("%c%c\n", 's', c);
 }
 
-void	push_double(t_stack *stack_a, t_stack *stack_b, char dest)
+void	push_double(t_stack *stack_a, t_stack *stack_b, char dest,
+		int (*f)(const char *str, ...))
 {
 	if (is_empty(stack_b))
 		return ;
 	push(stack_a, pop(stack_b));
-	ft_printf("p%c\n", dest);
+	if (*f != NULL)
+		f("p%c\n", dest);
 }
 
-void	rotate(t_stack *stack, char c)
+void	rotate(t_stack *stack, char c, int (*f)(const char *str, ...))
 {
 	int	temp;
 	int	i;
@@ -47,10 +50,11 @@ void	rotate(t_stack *stack, char c)
 		i--;
 	}
 	stack->array[0] = temp;
-	ft_printf("%c%c\n", 'r', c);
+	if (*f != NULL)
+		f("%c%c\n", 'r', c);
 }
 
-void	rotate_double(t_stack *a, t_stack *b)
+void	rotate_double(t_stack *a, t_stack *b, int (*f)(const char *str, ...))
 {
 	int	temp;
 	int	i;
@@ -73,10 +77,11 @@ void	rotate_double(t_stack *a, t_stack *b)
 		i--;
 	}
 	b->array[0] = temp;
-	ft_printf("rr\n");
+	if (*f != NULL)
+		f("rr\n");
 }
 
-void	reverse_rotate(t_stack *stack, char c)
+void	reverse_rotate(t_stack *stack, char c, int (*f)(const char *str, ...))
 {
 	int	temp;
 	int	i;
@@ -91,5 +96,6 @@ void	reverse_rotate(t_stack *stack, char c)
 		i++;
 	}
 	stack->array[stack->top] = temp;
-	ft_printf("%s%c\n", "rr", c);
+	if (*f != NULL)
+		f("%s%c\n", "rr", c);
 }

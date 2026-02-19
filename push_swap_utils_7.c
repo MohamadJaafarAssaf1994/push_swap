@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:06:08 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/16 18:43:21 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:24:31 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	max_of_stack(t_stack a)
 
 int	median(t_stack stack_a)
 {
-	int	sum;
-	int	index;
+	long long	sum;
+	int			index;
 
 	index = 0;
 	sum = 0;
@@ -78,5 +78,5 @@ int	median(t_stack stack_a)
 		sum += stack_a.array[index];
 		index++;
 	}
-	return (sum / (stack_a.top + 1));
+	return ((int)(sum / (stack_a.top + 1)));
 }

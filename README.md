@@ -32,11 +32,12 @@ make              # Compile the project
 make clean        # Remove object files
 make fclean       # Remove object files and executable
 make re           # Clean and recompile
+make bonus        # For my own checker
 ```
 
 ### Execution
 
-```bash
+```
 # With multiple arguments
 ./push_swap 3 1 4 1 5 9 2 6
 
@@ -46,6 +47,9 @@ make re           # Clean and recompile
 # With negative numbers
 ./push_swap -5 10 -3 0 8
 ```
+
+#With checker_linux
+ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_linux $ARG or my checker
 
 ### Requirements
 
@@ -93,6 +97,9 @@ The program validates input and handles:
 - `push_swap_utils_*.c`: Separate files for operation implementations
 - Clear separation of concerns (sorting logic, stack operations, utilities)
 
+### LIBFT
+- I also include the LIBFT project which contains the FT_PRINTF and the GNL
+
 ## Testing
 
 Comprehensive testing has been performed for:
@@ -121,19 +128,21 @@ Comprehensive testing has been performed for:
 
 ### AI Usage
 
-**OpenAI's Claude Haiku 4.5** was used for:
-1. **Debugging & Optimization**: Identified stack overflow issue caused by `MAX_SIZE INT_MAX` declaration and recommended fixing with smaller constant or dynamic allocation
-2. **Memory Leak Detection**: Provided Valgrind testing strategy and interpretation of memory profiling results
-3. **Edge Case Testing**: Suggested comprehensive test cases covering negative numbers, duplicates, extreme values, and invalid inputs
-4. **Code Review Assistance**: Helped validate memory safety across all test scenarios
+**Chatgbt** was used for:
+1. **Memory Leak Detection**: Provided Valgrind testing strategy and interpretation of memory profiling results
+2. **Edge Case Testing**: Suggested comprehensive test cases covering negative numbers, duplicates, extreme values, and invalid inputs
 
 ### Tester
-  https://github.com/SimonCROS/push_swap_tester
+ *** https://github.com/SimonCROS/push_swap_tester ***
 	1.clone
 	2.make
 	3.mv complexity ../
 	4. ./complexity 100 500 700
 	5. ./complexity 500 500 5500
+*** https://github.com/gemartin99/Push-Swap-Tester ***
+	1.Download the push_swap_test_linux.sh
+	2.Make sure to have the checker also
+	3.bash push_swap_test_linux.sh (For bonus: bash push_swap_test_linux.sh -b)
 	
 ## Optional Modifications
 
@@ -208,6 +217,6 @@ void	get_stack(t_stack *a, char **result)
 		i--;
 	}
 }
-This change allows both `-8` and `+8` to be treated as valid input. Recompile with `make re` after applying this modification, and the program will accept explicit plus signs.
+This change allows `+8` for example to be treated as valid input.
 
 

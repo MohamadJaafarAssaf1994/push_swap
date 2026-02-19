@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 09:26:31 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/17 18:46:49 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:24:38 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char *argv[])
 	if (a.top == 0 || is_sorted(a))
 	{
 		free_split(result);
-		return (1);
+		return (0);
 	}
 	push_all_a_to_b(&a, &b);
 	push_swap(&a, &b);

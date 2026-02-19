@@ -6,14 +6,14 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:01:08 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/19 15:46:09 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/19 16:14:15 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# define MAX_SIZE 1000
+# define MAX_SIZE 10000
 
 # include "libft/libft.h"
 # include <stdbool.h>

@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 18:45:17 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/17 19:08:11 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/19 11:50:28 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,11 @@ void	get_stack(t_stack *a, char **result)
 	a->top = ((i = count_words(result) - 1));
 	while (i >= 0)
 	{
-		if (!is_only_digits(result[i]))
-			error_exit();
 		str = ft_itoa(ft_atoi(result[i]));
-		if (ft_strncmp(str, result[i], 15) != 0)
+		if (!is_only_digits(result[i]) || ft_strncmp(str, result[i], 15) != 0)
 		{
 			free(str);
+			free_split(result);
 			error_exit();
 		}
 		free(str);

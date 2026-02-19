@@ -45,13 +45,11 @@ $(LIBFT):
 
 $(NAME): $(LIBFT) $(OBJS) $(COMMON_OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(COMMON_OBJS) $(LIBFT) -o $(NAME)
-	@echo "push_swap compiled successfully ✅"
 
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS) $(COMMON_OBJS)
 	$(CC) $(CFLAGS) $(BONUS_OBJS) $(COMMON_OBJS) $(LIBFT) -o $(BONUS_NAME)
-	@echo "checker compiled successfully ✅"
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -59,12 +57,10 @@ $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS) $(COMMON_OBJS)
 clean:
 	@make clean -C $(LIBFT_DIR)
 	rm -f $(OBJS) $(BONUS_OBJS) $(COMMON_OBJS)
-	@echo "Object files removed 🧹"
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
 	rm -f $(NAME) $(BONUS_NAME)
-	@echo "Executables removed 🗑"
 
 re: fclean all
 

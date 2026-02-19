@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:24:20 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/18 13:02:55 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/19 13:50:17 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,11 @@ int	main(int argc, char *argv[])
 		free_split(result);
 		error_exit();
 	}
-	/*if (a.top == 0 || is_sorted(a))
-	{
-		free_split(result);
-		return (1);
-	}*/
 	free_split(result);
 	b.top = -1;
 	while ((line = get_next_line(0)) != NULL)
 		execute(line, &a, &b);
-	if (is_sorted(a) && b.top == -1)
-		ft_printf("OK");
-	else
-		ft_printf("KO");
+	ft_printf("%s", (is_sorted(a) && b.top == -1) ? "OK" : "KO");
 	return (0);
 }
 

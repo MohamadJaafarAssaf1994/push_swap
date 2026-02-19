@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 10:44:02 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/18 12:35:51 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/19 12:28:10 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,24 @@ int	chosen_element_b_index(t_stack a, t_stack b)
 int	is_only_digits(char *str)
 {
 	int	i;
+	int	has_sign;
 
-	i = 0;
+	i = ((has_sign = 0));
 	if (!str || str[0] == '\0')
 		return (0);
 	if (str[0] == '-' || str[0] == '+')
+	{
 		i++;
+		has_sign = 1;
+	}
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
 			return (0);
 		i++;
 	}
+	if (has_sign == 1 && i == 1)
+		return (0);
 	return (1);
 }
 

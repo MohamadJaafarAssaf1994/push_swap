@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 17:11:18 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/18 13:05:22 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 13:47:09 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	swap(t_stack *stack, char c, int (*f)(const char *str, ...))
 
 	if (stack->top <= 0)
 		return ;
-	temp = stack->array[stack->top];
-	stack->array[stack->top] = stack->array[stack->top - 1];
-	stack->array[stack->top - 1] = temp;
+	temp = stack_get(stack, stack->top);
+	stack_set(stack, stack->top, stack_get(stack, stack->top - 1));
+	stack_set(stack, stack->top - 1, temp);
 	if (*f != NULL)
 		f("%c%c\n", 's', c);
 }
@@ -43,13 +43,13 @@ void	rotate(t_stack *stack, char c, int (*f)(const char *str, ...))
 	if (stack->top <= 0)
 		return ;
 	i = stack->top;
-	temp = stack->array[stack->top];
+	temp = stack_get(stack, stack->top);
 	while (i > 0)
 	{
-		stack->array[i] = stack->array[i - 1];
+		stack_set(stack, i, stack_get(stack, i - 1));
 		i--;
 	}
-	stack->array[0] = temp;
+	stack_set(stack, 0, temp);
 	if (*f != NULL)
 		f("%c%c\n", 'r', c);
 }
@@ -59,24 +59,24 @@ void	rotate_double(t_stack *a, t_stack *b, int (*f)(const char *str, ...))
 	int	temp;
 	int	i;
 
-	if (a->top <= 0)
+	if (a->top <= 0 || b->top <= -1)
 		return ;
 	i = a->top;
-	temp = a->array[a->top];
+	temp = stack_get(a, a->top);
 	while (i > 0)
 	{
-		a->array[i] = a->array[i - 1];
+		stack_set(a, i, stack_get(a, i - 1));
 		i--;
 	}
-	a->array[0] = temp;
+	stack_set(a, 0, temp);
 	i = b->top;
-	temp = b->array[b->top];
+	temp = stack_get(b, b->top);
 	while (i > 0)
 	{
-		b->array[i] = b->array[i - 1];
+		stack_set(b, i, stack_get(b, i - 1));
 		i--;
 	}
-	b->array[0] = temp;
+	stack_set(b, 0, temp);
 	if (*f != NULL)
 		f("rr\n");
 }
@@ -89,13 +89,13 @@ void	reverse_rotate(t_stack *stack, char c, int (*f)(const char *str, ...))
 	if (stack->top <= 0)
 		return ;
 	i = 0;
-	temp = stack->array[0];
+	temp = stack_get(stack, 0);
 	while (i < stack->top)
 	{
-		stack->array[i] = stack->array[i + 1];
+		stack_set(stack, i, stack_get(stack, i + 1));
 		i++;
 	}
-	stack->array[stack->top] = temp;
+	stack_set(stack, stack->top, temp);
 	if (*f != NULL)
 		f("%s%c\n", "rr", c);
 }

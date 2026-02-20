@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 18:45:17 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/19 15:35:05 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 13:03:18 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,73 +41,65 @@ void	push_swap(t_stack *a, t_stack *b)
 	operation_five(a);
 }
 
-int	count_words(char **result)
+static void	validate_and_alloc(t_stack *a, char **result)
 {
-	int	i;
-
-	i = 0;
-	while (result[i] != NULL)
-		i++;
-	return (i);
-}
-
-char	**get_args(int argc, char *argv[])
-{
-	char	**result;
-	int		i;
-
-	i = 0;
-	result = malloc(sizeof(char *) * argc);
-	if (!result)
-		return (NULL);
-	while (i < argc - 1)
-	{
-		result[i] = ft_strdup(argv[i + 1]);
-		i++;
-	}
-	result[i] = NULL;
-	return (result);
-}
-
-void	get_stack(t_stack *a, char **result)
-{
-	int		i;
-	char	*str;
+	int	count;
 
 	if (!result)
 		error_exit();
-	if (!count_words(result))
+	count = count_words(result);
+	if (!count)
 	{
+		stack_free(a);
 		free(result);
 		error_exit();
 	}
-	a->top = ((i = count_words(result) - 1));
-	while (i >= 0)
-	{
-		str = ft_itoa(ft_atoi(result[i]));
-		if (!is_only_digits(result[i]) || ft_strncmp(str, result[i], 15) != 0)
-		{
-			free(str);
-			free_split(result);
-			error_exit();
-		}
-		free(str);
-		a->array[a->top - i] = ft_atoi(result[i]);
-		i--;
-	}
+	count--;
+	a->capacity = count + 1;
+	a->array = malloc(sizeof(int) * a->capacity);
+	if (!a->array)
+		error_exit();
+	a->top = count;
 }
 
-void	free_split(char **tab)
+static void	validate_and_set(t_stack *a, int pos, char *s, char **result)
+{
+	char	*str;
+
+	str = ft_itoa(ft_atoi(s));
+	if (!is_only_digits(s) || ft_strncmp(str, s, 15) != 0)
+	{
+		stack_free(a);
+		free(str);
+		free_split(result);
+		error_exit();
+	}
+	free(str);
+	stack_set(a, pos, ft_atoi(s));
+}
+
+void	get_and_validate_stack(t_stack *a, char **result, t_stack *b)
 {
 	int	i;
 
-	if (!tab)
-		return ;
-	i = 0;
-	while (tab[i])
+	validate_and_alloc(a, result);
+	i = a->top;
+	while (i >= 0)
 	{
-		free(tab[i]);
-		i++;
+		validate_and_set(a, a->top - i, result[i], result);
+		i--;
 	}
-	free(tab);
+	if (!check_stack_double(*a))
+	{
+		stack_free(a);
+		stack_free(b);
+		free_split(result);
+		error_exit();
+	}
+}
+
+void	swap_double(t_stack *a, t_stack *b)
+{
+	swap(a, 'a', NULL);
+	swap(b, 'b', NULL);
 }

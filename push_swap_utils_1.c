@@ -6,11 +6,13 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 17:11:18 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/16 18:47:52 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 11:28:56 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
+#include <string.h>
 
 void	error_exit(void)
 {
@@ -25,17 +27,36 @@ bool	is_empty(t_stack *stack)
 
 bool	is_full(t_stack *stack)
 {
-	return (stack->top == (MAX_SIZE - 1));
+	if (stack->capacity == 0)
+		return (false);
+	return (stack->top == (stack->capacity - 1));
 }
 
 void	push(t_stack *stack, int value)
 {
-	if (is_full(stack))
+	int	old_cap;
+	int	*new_arr;
+
+	if (stack->top == -1)
 	{
-		printf("Stack Overflow\n");
-		return ;
+		stack->capacity = 1;
+		stack->array = malloc(sizeof(int) * stack->capacity);
+		if (!stack->array)
+			error_exit();
 	}
-	stack->array[++stack->top] = value;
+	else if (stack->top == stack->capacity - 1)
+	{
+		old_cap = stack->capacity;
+		stack->capacity += 1;
+		new_arr = malloc(sizeof(int) * stack->capacity);
+		if (!new_arr)
+			error_exit();
+		ft_memcpy(new_arr, stack->array, sizeof(int) * old_cap);
+		free(stack->array);
+		stack->array = new_arr;
+	}
+	stack->top++;
+	stack_set(stack, stack->top, value);
 }
 
 int	pop(t_stack *stack)
@@ -47,7 +68,7 @@ int	pop(t_stack *stack)
 		printf("Stack Underflow\n");
 		return (-1);
 	}
-	popped = stack->array[stack->top];
+	popped = stack_get(stack, stack->top);
 	stack->top--;
 	return (popped);
 }

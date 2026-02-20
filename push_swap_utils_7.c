@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:06:08 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/19 14:24:31 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/19 16:52:40 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int	min_of_stack(t_stack a)
 	int	min;
 	int	i;
 
-	min = a.array[0];
+	min = stack_get(&a, 0);
 	i = 1;
 	while (i <= a.top)
 	{
-		if (min > a.array[i])
-			min = a.array[i];
+		if (min > stack_get(&a, i))
+			min = stack_get(&a, i);
 		i++;
 	}
 	return (min);
@@ -55,12 +55,12 @@ int	max_of_stack(t_stack a)
 	int	max;
 	int	i;
 
-	max = a.array[0];
+	max = stack_get(&a, 0);
 	i = 1;
 	while (i <= a.top)
 	{
-		if (max < a.array[i])
-			max = a.array[i];
+		if (max < stack_get(&a, i))
+			max = stack_get(&a, i);
 		i++;
 	}
 	return (max);
@@ -75,8 +75,8 @@ int	median(t_stack stack_a)
 	sum = 0;
 	while (index <= stack_a.top)
 	{
-		sum += stack_a.array[index];
+		sum += stack_get(&stack_a, index);
 		index++;
 	}
-	return ((int)(sum / (stack_a.top + 1)));
+	return ((int)(sum / (stack_size(&stack_a))));
 }

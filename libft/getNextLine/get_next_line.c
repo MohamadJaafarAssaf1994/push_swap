@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 09:17:17 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/17 14:38:10 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:24:35 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ char	*get_next_line(int fd)
 	char		*output_text;
 	static char	*text;
 
+	if (fd == -1)
+		free(text);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (read(fd, 0, 0) < 0)

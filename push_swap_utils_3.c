@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:07:53 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/18 13:05:17 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 13:47:15 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	sort_stack_a(t_stack *stack, char c)
 		case_one(stack);
 		return ;
 	}
-	top = stack->array[2];
-	middle = stack->array[1];
-	bottom = stack->array[0];
+	top = stack_get(stack, 2);
+	middle = stack_get(stack, 1);
+	bottom = stack_get(stack, 0);
 	if (top <= middle && middle <= bottom)
 		return ;
 	if (top <= middle && bottom <= top)
@@ -43,10 +43,10 @@ void	sort_stack_a(t_stack *stack, char c)
 
 void	push_all_a_to_b(t_stack *a, t_stack *b)
 {
-	b->top = -1;
+	stack_init(b);
 	while (a->top > 2)
 	{
-		if (a->array[a->top] <= median(*a))
+		if (stack_get(a, a->top) <= median(*a))
 			push_double(b, a, 'b', ft_printf);
 		else
 		{
@@ -63,8 +63,8 @@ int	smallest_biggest_in_stack_a(t_stack a, t_stack b, int index_element_stack_b)
 	int	diff;
 
 	i = 0;
-	if (is_max(b.array[index_element_stack_b], a.array, a.top + 1)
-		|| is_max(b.array[index_element_stack_b], a.array, a.top + 1))
+	if (is_max(b.array[index_element_stack_b], a.array, stack_size(&a))
+		|| is_min(b.array[index_element_stack_b], a.array, stack_size(&a)))
 		return (min_of_stack(a));
 	diff = max_of_stack(a) - b.array[index_element_stack_b];
 	while (i <= a.top)
@@ -83,24 +83,24 @@ void	reverse_rotate_double(t_stack *a, t_stack *b, int (*f)(const char *str,
 	int	temp;
 	int	i;
 
-	if (a->top <= 0)
+	if (a->top <= 0 || b->top <= -1)
 		return ;
 	i = 0;
-	temp = a->array[0];
+	temp = stack_get(a, 0);
 	while (i < a->top)
 	{
-		a->array[i] = a->array[i + 1];
+		stack_set(a, i, stack_get(a, i + 1));
 		i++;
 	}
-	a->array[a->top] = temp;
+	stack_set(a, a->top, temp);
 	i = 0;
-	temp = b->array[0];
+	temp = stack_get(b, 0);
 	while (i < b->top)
 	{
-		b->array[i] = b->array[i + 1];
+		stack_set(b, i, stack_get(b, i + 1));
 		i++;
 	}
-	b->array[b->top] = temp;
+	stack_set(b, b->top, temp);
 	if (*f != NULL)
 		f("rrr\n");
 }

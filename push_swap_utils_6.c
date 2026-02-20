@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 10:44:02 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/19 12:28:10 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:56:21 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	chosen_element_b_index(t_stack a, t_stack b)
 
 	i = b.top;
 	j = 0;
-	min_cost = 100000;
+	min_cost = INT_MAX;
 	while (i >= 0)
 	{
 		if (total_cost(i, a, b) < min_cost)
@@ -64,7 +64,7 @@ void	case_one(t_stack *a)
 	swap(a, 'a', ft_printf);
 }
 
-int	check_stack(t_stack a)
+int	check_stack_double(t_stack a)
 {
 	int	i;
 	int	j;
@@ -75,7 +75,7 @@ int	check_stack(t_stack a)
 		j = i + 1;
 		while (j <= a.top)
 		{
-			if (a.array[i] == a.array[j])
+			if (stack_get(&a, i) == stack_get(&a, j))
 				return (0);
 			j++;
 		}
@@ -91,7 +91,7 @@ int	is_sorted(t_stack a)
 	i = 0;
 	while (i < a.top)
 	{
-		if (a.array[i] < a.array[i + 1])
+		if (stack_get(&a, i) < stack_get(&a, i + 1))
 			return (0);
 		i++;
 	}

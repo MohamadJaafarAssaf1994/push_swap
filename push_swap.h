@@ -6,14 +6,12 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:01:08 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/19 16:14:15 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:58:47 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
-# define MAX_SIZE 10000
 
 # include "libft/libft.h"
 # include <stdbool.h>
@@ -23,8 +21,9 @@
 
 typedef struct s_stack
 {
-	int	array[MAX_SIZE];
+	int	*array;
 	int	top;
+	int	capacity;
 }		t_stack;
 
 bool	is_empty(t_stack *stack);
@@ -65,10 +64,16 @@ int		is_only_digits(char *str);
 void	case_one(t_stack *a);
 char	**get_args(int argc, char *argv[]);
 void	error_exit(void);
-void	get_stack(t_stack *a, char **result);
-int		check_stack(t_stack a);
+void	get_and_validate_stack(t_stack *a, char **result, t_stack *b);
+void	stack_init(t_stack *s);
+void	stack_free(t_stack *s);
+int		stack_size(t_stack *s);
+int		stack_get(t_stack *s, int index);
+void	stack_set(t_stack *s, int index, int value);
+int		check_stack_double(t_stack a);
 int		is_sorted(t_stack a);
 void	free_split(char **tab);
 void	push_swap(t_stack *a, t_stack *b);
+void	swap_double(t_stack *a, t_stack *b);
 
 #endif

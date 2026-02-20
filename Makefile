@@ -18,7 +18,9 @@ COMMON_SRCS = push_swap_utils_1.c \
               push_swap_utils_5.c \
               push_swap_utils_6.c \
               push_swap_utils_7.c \
-			  push_swap_utils_8.c
+			  push_swap_utils_8.c \
+			  stack_helpers.c \
+			  push_swap_utils_9.c
 
 COMMON_OBJS = $(COMMON_SRCS:.c=.o)
 

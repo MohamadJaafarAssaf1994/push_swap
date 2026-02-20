@@ -143,14 +143,14 @@ Comprehensive testing has been performed for:
 	1.Download the push_swap_test_linux.sh
 	2.Make sure to have the checker also
 	3.bash push_swap_test_linux.sh (For bonus: bash push_swap_test_linux.sh -b)
-	
+
 ## Optional Modifications
 
 ### Support for Explicit Plus Sign Numbers (e.g., `+8`)
 
 If the evaluator requires the program to accept numbers with explicit plus signs (e.g., `+8`), the following modifications can be made:
 
-**File**: `push_swap_utils_9.c` (do not forget to include it in Makefile) and the function `get_stack()` to be replaced
+**File**: Add the below fucntions to `push_swap_utils_9.c` (ft_atol to be added to push_swap.h) and the function `validate_and_set()` to be replaced in push_swap_utils_8.c
 
 **Modification**: Update the validation function to accept the `+` sign at the beginning of numbers:
 
@@ -188,34 +188,21 @@ long	ft_atol(const char *str)
 	}
 	return (result * sign);
 }
-***get_stack()***
-void	get_stack(t_stack *a, char **result)
+***validate_and_set()***
+static void	validate_and_set(t_stack *a, int pos, char *s, char **result)
 {
-	int	i;
-
-	if (!result)
-		error_exit();
-	if (!count_words(result))
+	if (!is_only_digits(s))
 	{
-		free(result);
+		stack_free(a);
+		free_split(result);
 		error_exit();
 	}
-	a->top = ((i = count_words(result) - 1));
-	while (i >= 0)
+	if (ft_atol(s) > INT_MAX || ft_atol(s) < INT_MIN)
 	{
-		if (!is_only_digits(result[i]))
-		{
-			free_split(result);
-			error_exit();
-		}
-		if (ft_atol(result[i]) > INT_MAX || ft_atol(result[i]) < INT_MIN)
-		{
-			free_split(result);
-			error_exit();
-		}
-		a->array[a->top - i] = ft_atoi(result[i]);
-		i--;
+		free_split(result);
+		error_exit();
 	}
+	stack_set(a, pos, ft_atoi(s));
 }
 This change allows `+8` for example to be treated as valid input.
 

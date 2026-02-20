@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 18:45:17 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/20 13:03:18 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:37:23 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static void	validate_and_set(t_stack *a, int pos, char *s, char **result)
 	char	*str;
 
 	str = ft_itoa(ft_atoi(s));
+	if (!str)
+		return ;
 	if (!is_only_digits(s) || ft_strncmp(str, s, 15) != 0)
 	{
 		stack_free(a);

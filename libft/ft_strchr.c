@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 11:33:59 by mohassaf          #+#    #+#             */
-/*   Updated: 2025/12/01 13:09:35 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:38:03 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*ft_strchr(const char *str, int searchedChar)
 {
+	if (!str)
+		return (NULL);
 	while (*str)
 	{
 		if (*str == (char)searchedChar)

@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:20:00 by mohassaf          #+#    #+#             */
-/*   Updated: 2025/11/16 12:14:21 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:37:44 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *str)
 	size_t	len;
 
 	len = 0;
+	if (!str)
+		return (0);
 	while (*str++)
 		len++;
 	return (len);

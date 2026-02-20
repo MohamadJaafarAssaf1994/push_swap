@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   push_swap_utils_9.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 17:10:00 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/20 09:44:46 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:36:27 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ char	**get_args(int argc, char *argv[])
 	while (i < argc - 1)
 	{
 		result[i] = ft_strdup(argv[i + 1]);
+		if (!result[i])
+		{
+			free_split(result);
+			return (NULL);
+		}
 		i++;
 	}
 	result[i] = NULL;

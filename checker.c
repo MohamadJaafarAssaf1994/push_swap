@@ -6,7 +6,7 @@
 /*   By: mohassaf <mohassaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:24:20 by mohassaf          #+#    #+#             */
-/*   Updated: 2026/02/20 14:24:13 by mohassaf         ###   ########.fr       */
+/*   Updated: 2026/02/23 10:29:16 by mohassaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	init_stacks(int argc, char **argv, t_stack *a, t_stack *b)
 	char	**result;
 
 	if (argc == 1)
-		error_exit();
+		exit(0);
 	if (argc == 2)
 		result = ft_split(argv[1], ' ');
 	else
